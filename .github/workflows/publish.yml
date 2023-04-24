@@ -1,0 +1,32 @@
+name: Publish
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        cache: 'npm'
+
+    - run: npm ci
+    - run: npm run build
+    - run: npm run compile
+
+    - name: Publish Website
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: 'public'
+        single-commit: true
