@@ -1,5 +1,4 @@
-import { compile } from 'vega-lite';
-import { writeFileSync } from 'fs';
+import { TopLevelSpec } from 'vega-lite';
 
 
 // TODO: use svg icon: https://erikflowers.github.io/weather-icons/
@@ -14,14 +13,15 @@ const emojiMap = {
   Snow: '⛄️',
 };
 
-const timeMap = {};
+const timeMap = new Array<string>(24);
 for (let i = 0; i < 24; i++) {
-  timeMap['' + i] = (i % 12) + (i >= 12 ? 'PM' : 'AM');
+  timeMap[i] = (i % 12) + (i >= 12 ? 'PM' : 'AM');
 }
-timeMap['0'] = '12AM';
-timeMap['12'] = '12PM';
+timeMap[0] = '12AM';
+timeMap[12] = '12PM';
 
-const spec = {
+
+export const vlSpec: TopLevelSpec = {
   $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
   config: {
     view: { stroke: '' },
@@ -80,7 +80,3 @@ const spec = {
     },
   ],
 };
-
-
-const vegaSpec = compile(spec).spec;
-writeFileSync('./public/spec.js', `const spec = ${JSON.stringify(vegaSpec)};`);

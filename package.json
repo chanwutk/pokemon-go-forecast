@@ -3,11 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "main": "compile-spec.js",
-  "type": "module",
-  "scripts": {},
+  "scripts": {
+    "build": "rm -rf ./dist && tsc --project .",
+    "compile": "node ./dist/compile-spec.js"
+  },
   "author": "Chanwut (Mick) Kittivorawong",
   "license": "BSD-3-Clause",
   "dependencies": {
     "vega-lite": "^5.7.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.16.0",
+    "typescript": "^5.0.4"
   }
 }
