@@ -2,16 +2,16 @@ import { TopLevelSpec } from 'vega-lite';
 
 
 // TODO: use svg icon: https://erikflowers.github.io/weather-icons/
-const emojiMap = {
-  Windy: '🌪️',
-  'Partly Cloudy': '⛅️',
-  Sunny: '☀️',
-  Clear: '🌙',
-  Cloudy: '☁️',
-  Fog: '🌫',
-  Rain: '☔️',
-  Snow: '⛄️',
-};
+// const emojiMap = {
+//   Windy: '🌪️',
+//   'Partly Cloudy': '⛅️',
+//   Sunny: '☀️',
+//   Clear: '🌙',
+//   Cloudy: '☁️',
+//   Fog: '🌫',
+//   Rain: '☔️',
+//   Snow: '⛄️',
+// };
 
 const iconMap = {
   Windy: 'wind.svg',
@@ -42,7 +42,7 @@ export const vlSpec: TopLevelSpec = {
   transform: [
     { calculate: 'datum.weather !== null', as: 'valid' },
     { filter: { field: 'valid', equal: true } },
-    { calculate: JSON.stringify(emojiMap) + '[datum.weather]', as: 'emoji' },
+    // { calculate: JSON.stringify(emojiMap) + '[datum.weather]', as: 'emoji' },
     { calculate: JSON.stringify(timeMap) + '[datum.time]', as: 'time' },
     { calculate: '\"./icons/\" + ' + JSON.stringify(iconMap) + '[datum.weather]', as: 'icon' },
   ],
