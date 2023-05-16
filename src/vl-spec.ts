@@ -14,21 +14,21 @@ const emojiMap = {
 };
 
 const iconMap = {
-  Windy: 'https://basmilius.github.io/weather-icons/production/fill/all/wind.svg',
-  'Partly Cloudy': 'https://basmilius.github.io/weather-icons/production/fill/all/partly-cloudy-day.svg',
-  Sunny: 'https://basmilius.github.io/weather-icons/production/fill/all/clear-day.svg',
-  Clear: 'https://basmilius.github.io/weather-icons/production/fill/all/starry-night.svg',
-  Fog: 'https://basmilius.github.io/weather-icons/production/fill/all/fog.svg',
-  Rain: 'https://basmilius.github.io/weather-icons/production/fill/all/rain.svg',
-  Snow: 'https://basmilius.github.io/weather-icons/production/fill/all/snow.svg',
+  Windy: 'wind.svg',
+  'Partly Cloudy': 'partly-cloudy-day.svg',
+  Sunny: 'clear-day.svg',
+  Clear: 'starry-night.svg',
+  Fog: 'fog.svg',
+  Rain: 'rain.svg',
+  Snow: 'snow.svg',
 } as const;
 
 const timeMap = new Array<string>(24);
 for (let i = 0; i < 24; i++) {
-  timeMap[i] = (i % 12) + (i >= 12 ? 'PM' : 'AM');
+  timeMap[i] = (i % 12) + (i >= 12 ? ' PM' : ' AM');
 }
-timeMap[0] = '12AM';
-timeMap[12] = '12PM';
+timeMap[0] = '12 AM';
+timeMap[12] = '12 PM';
 
 
 export const vlSpec: TopLevelSpec = {
@@ -44,7 +44,7 @@ export const vlSpec: TopLevelSpec = {
     { filter: { field: 'valid', equal: true } },
     { calculate: JSON.stringify(emojiMap) + '[datum.weather]', as: 'emoji' },
     { calculate: JSON.stringify(timeMap) + '[datum.time]', as: 'time' },
-    { calculate: JSON.stringify(iconMap) + '[datum.weather]', as: 'icon' },
+    { calculate: '\"./icons/\" + ' + JSON.stringify(iconMap) + '[datum.weather]', as: 'icon' },
   ],
   encoding: {
     x: {
@@ -59,6 +59,7 @@ export const vlSpec: TopLevelSpec = {
         ticks: false,
         domain: false,
         orient: 'top',
+        labelFont: 'Inter',
       },
       sort: { field: 'order', op: 'min', order: 'ascending' },
     },
@@ -68,9 +69,11 @@ export const vlSpec: TopLevelSpec = {
       axis: {
         title: '',
         labelFontSize: 20,
-        labelPadding: 15,
+        labelPadding: 10,
         ticks: false,
         domain: false,
+        labelFont: 'Noto Sans Thai',
+        offset: -15,
       },
     },
   },
@@ -83,13 +86,13 @@ export const vlSpec: TopLevelSpec = {
     //   },
     // },
     {
-      mark: { type: 'image', baseline: 'middle', width: 30, height: 30 },
+      mark: { type: 'image', baseline: 'middle', width: 75, height: 75, align: 'center' },
       encoding: {
         url: { field: 'icon', type: 'nominal' },
       },
     },
     {
-      mark: { type: 'text', baseline: 'middle', dy: 25 },
+      mark: { type: 'text', baseline: 'middle', dy: 35, font: 'Inter' },
       encoding: {
         text: { field: 'types', type: 'nominal' },
         size: { value: 8 },
