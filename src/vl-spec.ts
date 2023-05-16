@@ -13,6 +13,16 @@ const emojiMap = {
   Snow: '⛄️',
 };
 
+const iconMap = {
+  Windy: 'https://basmilius.github.io/weather-icons/production/fill/all/wind.svg',
+  'Partly Cloudy': 'https://basmilius.github.io/weather-icons/production/fill/all/partly-cloudy-day.svg',
+  Sunny: 'https://basmilius.github.io/weather-icons/production/fill/all/clear-day.svg',
+  Clear: 'https://basmilius.github.io/weather-icons/production/fill/all/starry-night.svg',
+  Fog: 'https://basmilius.github.io/weather-icons/production/fill/all/fog.svg',
+  Rain: 'https://basmilius.github.io/weather-icons/production/fill/all/rain.svg',
+  Snow: 'https://basmilius.github.io/weather-icons/production/fill/all/snow.svg',
+} as const;
+
 const timeMap = new Array<string>(24);
 for (let i = 0; i < 24; i++) {
   timeMap[i] = (i % 12) + (i >= 12 ? 'PM' : 'AM');
@@ -34,6 +44,7 @@ export const vlSpec: TopLevelSpec = {
     { filter: { field: 'valid', equal: true } },
     { calculate: JSON.stringify(emojiMap) + '[datum.weather]', as: 'emoji' },
     { calculate: JSON.stringify(timeMap) + '[datum.time]', as: 'time' },
+    { calculate: JSON.stringify(iconMap) + '[datum.weather]', as: 'icon' },
   ],
   encoding: {
     x: {
@@ -64,11 +75,17 @@ export const vlSpec: TopLevelSpec = {
     },
   },
   layer: [
+    // {
+    //   mark: { type: 'text', baseline: 'middle' },
+    //   encoding: {
+    //     text: { field: 'emoji', type: 'nominal' },
+    //     size: { value: 50 },
+    //   },
+    // },
     {
-      mark: { type: 'text', baseline: 'middle' },
+      mark: { type: 'image', baseline: 'middle', width: 30, height: 30 },
       encoding: {
-        text: { field: 'emoji', type: 'nominal' },
-        size: { value: 50 },
+        text: { field: 'icon', type: 'nominal' },
       },
     },
     {
