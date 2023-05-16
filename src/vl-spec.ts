@@ -85,7 +85,7 @@ export const vlSpec: TopLevelSpec = {
     {
       mark: { type: 'image', baseline: 'middle', width: 30, height: 30 },
       encoding: {
-        text: { field: 'icon', type: 'nominal' },
+        url: { field: 'icon', type: 'nominal' },
       },
     },
     {
