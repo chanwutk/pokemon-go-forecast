@@ -18,6 +18,7 @@ const iconMap = {
   'Partly Cloudy': 'partly-cloudy-day.svg',
   Sunny: 'clear-day.svg',
   Clear: 'starry-night.svg',
+  Cloudy: 'cloudy.svg',
   Fog: 'fog.svg',
   Rain: 'rain.svg',
   Snow: 'snow.svg',
