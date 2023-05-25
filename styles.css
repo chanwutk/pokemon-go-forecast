@@ -1,0 +1,49 @@
+@font-face {
+    font-family: Inter;
+    src: url(./fonts/Inter-Regular.ttf);
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: Inter;
+    src: url(./fonts/Inter-Bold.ttf);
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: Noto Sans Thai;
+    src: url(./fonts/NotoSansThai-Regular.ttf);
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: Noto Sans Thai;
+    src: url(./fonts/NotoSansThai-Bold.ttf);
+    font-weight: bold;
+}
+
+* {
+    font-family: Inter, 'Noto Sans Thai';
+}
+
+body {
+    color: rgb(102, 102, 102);
+}
+
+a {
+    text-decoration-line: none;
+}
+
+a:link {
+    color: rgb(255, 174, 0);
+}
+
+/* mouse over link */
+a:hover {
+    color: rgb(189, 129, 0);
+}
+
+/* selected link */
+a:active {
+    color: rgb(104, 71, 0);
+}
