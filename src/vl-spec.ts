@@ -2,16 +2,16 @@ import { TopLevelSpec } from 'vega-lite';
 
 
 // TODO: use svg icon: https://erikflowers.github.io/weather-icons/
-// const emojiMap = {
-//   Windy: '🌪️',
-//   'Partly Cloudy': '⛅️',
-//   Sunny: '☀️',
-//   Clear: '🌙',
-//   Cloudy: '☁️',
-//   Fog: '🌫',
-//   Rain: '☔️',
-//   Snow: '⛄️',
-// };
+const emojiMap = {
+  Windy: '🌪️',
+  'Partly Cloudy': '⛅️',
+  Sunny: '☀️',
+  Clear: '🌙',
+  Cloudy: '☁️',
+  Fog: '🌫',
+  Rain: '☔️',
+  Snow: '⛄️',
+};
 
 const iconMap = {
   Windy: 'wind.svg',
@@ -43,9 +43,9 @@ export const vlSpec: TopLevelSpec = {
   transform: [
     { calculate: 'datum.weather !== null', as: 'valid' },
     { filter: { field: 'valid', equal: true } },
-    // { calculate: JSON.stringify(emojiMap) + '[datum.weather]', as: 'emoji' },
+    { calculate: JSON.stringify(emojiMap) + '[datum.weather]', as: 'emoji' },
     { calculate: JSON.stringify(timeMap) + '[datum.time]', as: 'time' },
-    { calculate: '\"./icons/\" + ' + JSON.stringify(iconMap) + '[datum.weather]', as: 'icon' },
+    // { calculate: '\"./icons/\" + ' + JSON.stringify(iconMap) + '[datum.weather]', as: 'icon' },
   ],
   encoding: {
     x: {
@@ -79,19 +79,19 @@ export const vlSpec: TopLevelSpec = {
     },
   },
   layer: [
-    // {
-    //   mark: { type: 'text', baseline: 'middle' },
-    //   encoding: {
-    //     text: { field: 'emoji', type: 'nominal' },
-    //     size: { value: 50 },
-    //   },
-    // },
     {
-      mark: { type: 'image', baseline: 'middle', width: 75, height: 75, align: 'center' },
+      mark: { type: 'text', baseline: 'middle' },
       encoding: {
-        url: { field: 'icon', type: 'nominal' },
+        text: { field: 'emoji', type: 'nominal' },
+        size: { value: 50 },
       },
     },
+    // {
+    //   mark: { type: 'image', baseline: 'middle', width: 75, height: 75, align: 'center' },
+    //   encoding: {
+    //     url: { field: 'icon', type: 'nominal' },
+    //   },
+    // },
     {
       mark: { type: 'text', baseline: 'middle', dy: 35, font: 'Inter' },
       encoding: {
